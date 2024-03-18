@@ -1,0 +1,201 @@
+swagger: '2.0'
+info:
+  title: ORDS generated API for wccs
+  version: 1.0.0
+host: soatst.fdny.org
+basePath: /ords/hris/wfs/wccs
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /getDiagCategoryDetails:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cat_desc:
+                      $ref: '#/definitions/VARCHAR2'
+                    niosh_covered:
+                      $ref: '#/definitions/CHAR'
+      parameters:
+        - name: p_cat
+          in: header
+          type: string
+          required: true
+  /getICD10Code:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    icd10:
+                      $ref: '#/definitions/VARCHAR2'
+      parameters:
+        - name: p_diag
+          in: header
+          type: string
+          required: true
+  /getServiceType:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+      parameters:
+        - name: p_auth_date
+          in: query
+          type: string
+          description: Implicit parameter
+        - name: p_icd
+          in: header
+          type: string
+          required: true
+        - name: p_ssn
+          in: header
+          type: string
+          required: true
+  /isCertifiedCategory:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    certified:
+                      $ref: '#/definitions/VARCHAR2'
+      parameters:
+        - name: p_auth_date
+          in: header
+          type: string
+          required: true
+        - name: p_icd
+          in: header
+          type: string
+          required: true
+        - name: p_ssn
+          in: header
+          type: string
+          required: true
+  /isCertifiedCategoryCsu:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    certifiedcsu:
+                      $ref: '#/definitions/VARCHAR2'
+      parameters:
+        - name: p_auth_date
+          in: header
+          type: string
+          required: true
+        - name: p_icd
+          in: header
+          type: string
+          required: true
+        - name: p_ssn
+          in: header
+          type: string
+          required: true
+  /isEnrolled:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    enrolled:
+                      $ref: '#/definitions/VARCHAR2'
+      parameters:
+        - name: p_ssn
+          in: header
+          type: string
+          required: true
+  /isInternalPhysician:
+    get:
+      description: Retrieve records from wccs
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queried record.
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    doc_code:
+                      $ref: '#/definitions/CHAR'
+      parameters:
+        - name: p_npinumber
+          in: header
+          type: string
+          required: true
+definitions:
+  CHAR:
+    type: string
+  VARCHAR2:
+    type: string
